@@ -1,0 +1,58 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 18.09.2019, 14:49:49
+    Author     : Your Name <your.name at your.org>
+*/
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font: 20px Montserrat, sans-serif;
+    line-height: 1.8;
+    color: #f5f6f7;
+}
+p {font-size: 16px;}
+.margin {margin-bottom: 45px;}
+.bg-1 { 
+    background-color: #1abc9c; /* Green */
+    color: #ffffff;
+}
+.bg-2 { 
+    background-color: #474e5d; /* Dark Blue */
+    color: #ffffff;
+}
+.bg-3 { 
+    background-color: #ffffff; /* White */
+    color: #555555;
+}
+.bg-4 { 
+    background-color: #2f2f2f; /* Black Gray */
+    color: #fff;
+}
+
+input, select {
+	color: white !important;
+	background-color: #222 !important;
+	border: none !important;
+	border-bottom: 2px solid #2f2f2f !important;
+	transition: all .2s !important;
+	outline: none !important;
+	box-shadow: none !important;
+}
+
+input:focus, select:focus {
+	border-bottom: 2px solid #1abc9c !important;
+}
+
+.control-label {
+	padding-top: 0 !important;
+	font-weight: normal;
+	font-size: 18px;
+	color: #9d9d9d;
+}
+
