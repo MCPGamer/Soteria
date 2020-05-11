@@ -20,14 +20,21 @@ public class UserService {
 	private UserRepository repository;
 	private ArrayList<User> userList;
 
-	private String loggedInUser;
-	private String loggedInPassword;
+	private LoginContext loggedInUser;
+
+	public LoginContext getLoggedInUser() {
+		return loggedInUser;
+	}
+
+	public void setLoggedInUser(LoginContext loggedInUser) {
+		this.loggedInUser = loggedInUser;
+	}
 
 	public UserService() {
 		this.userList = new ArrayList<>();
 	}
 
-	public void addMedia(User user) {
+	public void addUser(User user) {
 		repository.save(user);
 		this.userList.add(user);
 	}
