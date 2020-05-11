@@ -1,7 +1,5 @@
 package ch.bbw.soteria.controller;
 
-import java.util.Arrays;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -52,7 +50,7 @@ public class MainMenuController {
 
 		// Redirect to Password overview
 		model.addAttribute("user", newUser);
-		return "index.html";
+		return "overview.html";
 	}
 
 	@PostMapping("login")
@@ -75,7 +73,7 @@ public class MainMenuController {
 
 			// Redirect to Password overview
 			model.addAttribute("user", loggedInUser);
-			return "index.html";
+			return "overview.html";
 		} else {
 			userService.setLoggedInUser(null);
 

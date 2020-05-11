@@ -9,12 +9,14 @@ import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.annotation.SessionScope;
 
 /**
  * @author Duarte Goncalves Mendes
  * @version 1.0
  */
 @Service
+@SessionScope
 public class UserService {
 	@Autowired
 	private UserRepository repository;
