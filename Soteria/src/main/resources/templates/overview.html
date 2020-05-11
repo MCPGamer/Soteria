@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Soteria</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/style.css" />
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+</head>
+<body class="bg-4">
+	<div id="accordion">
+		<div>
+			<th:block th:each="Password,pw : ${user.passwords}">
+				<div class="card-body">
+					<table class="table">
+						<thead>
+							<tr>
+								<th scope="col">Domain</th>
+								<th scope="col">Username</th>
+								<th scope="col">Password</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td th:text="${pw.domain}"></td>
+								<td th:text="${pw.username}"></td>
+								<td th:text="${pw.password}"></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</th:block>
+		</div>
+	</div>
+	<footer class="container-fluid bg-4 text-center">
+		<p>&copy; Duarte Mendes & Joel Weiss</p>
+	</footer>
+</body>
+</html>
