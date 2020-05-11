@@ -18,7 +18,10 @@
 	</nav>
 	<!--/.Navbar-->
 	<div id="accordion">
-		<h2>Willkommen <div th:text="${user.username}"/></h2>
+		<h2>
+			Willkommen
+			<div th:text="${user.username}" />
+		</h2>
 		<div>
 			<th:block th:each="pw : ${user.passwords}">
 				<div class="card-body">

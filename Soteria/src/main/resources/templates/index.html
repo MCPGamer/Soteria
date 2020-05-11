@@ -22,7 +22,7 @@
 		<h1>Soteria - Your Nr.1 Tool for Passwordmanaging</h1>
 		<p />
 		<p />
-		
+
 		<form class="form-horizontal" action="#" th:action="@{/login}"
 			th:object="${user}" method="post">
 			<div>
@@ -31,23 +31,23 @@
 					<label class="control-label col-sm-4" for="username">Username</label>
 					<div class="col-sm-4">
 						<input type="text" class="form-control" id="username"
-							th:field="*{username}" autocomplete="off"/>
+							th:field="*{username}" autocomplete="off" />
 					</div>
 				</div>
 				<div class="form-group">
 					<label class="control-label col-sm-4" for="password">Password</label>
 					<div class="col-sm-4">
 						<input type="password" class="form-control" id="password"
-							th:field="*{password}" autocomplete="off"/>
+							th:field="*{password}" autocomplete="off" />
 					</div>
 				</div>
 			</div>
-			<div th:if="${credentialsWrong == true}" >
-				<p style="color:red">Die Credentials sind falsch</p>
+			<div th:if="${credentialsWrong == true}">
+				<p style="color: red">Die Credentials sind falsch</p>
 			</div>
 			<button id="search-btn" type="submit" class="btn btn-info">Login</button>
 		</form>
-		
+
 		<form class="form-horizontal" action="#" th:action="@{/register}"
 			th:object="${user}" method="post">
 			<div>
@@ -56,14 +56,14 @@
 					<label class="control-label col-sm-4" for="username">Username</label>
 					<div class="col-sm-4">
 						<input type="text" class="form-control" id="username"
-							th:field="*{username}" autocomplete="off"/>
+							th:field="*{username}" autocomplete="off" />
 					</div>
 				</div>
 				<div class="form-group">
 					<label class="control-label col-sm-4" for="password">Password</label>
 					<div class="col-sm-4">
 						<input type="password" class="form-control" id="password"
-							th:field="*{password}" autocomplete="off"/>
+							th:field="*{password}" autocomplete="off" />
 					</div>
 				</div>
 			</div>
