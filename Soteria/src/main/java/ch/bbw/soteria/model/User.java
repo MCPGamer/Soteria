@@ -1,9 +1,12 @@
 package ch.bbw.soteria.model;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 /**
  * @author Duarte Goncalves Mendes
@@ -16,6 +19,17 @@ public class User {
 	private long id;
 	private String username;
 	private String password;
+	
+	@OneToMany(mappedBy = "user")
+	private List<Password> passwords;
+	
+	public List<Password> getPasswords() {
+		return passwords;
+	}
+
+	public void setPasswords(List<Password> passwords) {
+		this.passwords = passwords;
+	}
 
 	public long getId() {
 		return id;
