@@ -12,7 +12,13 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 </head>
 <body class="bg-4">
+	<!--Navbar-->
+	<nav class="navbar navbar-expand-lg navbar-inverse">
+		<div class="navbar-header">Soteria</div>
+	</nav>
+	<!--/.Navbar-->
 	<div id="accordion">
+		<h2>Willkommen <div th:text="${user.username}"/></h2>
 		<div>
 			<th:block th:each="pw : ${user.passwords}">
 				<div class="card-body">
