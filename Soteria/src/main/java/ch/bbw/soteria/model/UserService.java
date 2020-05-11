@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.context.annotation.SessionScope;
 
 /**
- * @author Duarte Goncalves Mendes
+ * @author Duarte Goncalves Mendes & Joel Weiss
  * @version 1.0
  */
 @Service

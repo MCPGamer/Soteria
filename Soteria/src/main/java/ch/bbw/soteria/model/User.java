@@ -11,7 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 /**
- * @author Duarte Goncalves Mendes
+ * @author Duarte Goncalves Mendes & Joel Weiss
  * @version 1.0
  */
 @Entity
@@ -21,10 +21,10 @@ public class User {
 	private long id;
 	private String username;
 	private String password;
-	
+
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "user", cascade = CascadeType.ALL)
 	private List<Password> passwords;
-	
+
 	public List<Password> getPasswords() {
 		return passwords;
 	}

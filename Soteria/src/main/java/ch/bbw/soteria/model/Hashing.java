@@ -3,6 +3,10 @@ package ch.bbw.soteria.model;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+/**
+ * @author Duarte Goncalves Mendes & Joel Weiss
+ * @version 1.0
+ */
 public class Hashing {
 	public static String hashString(String text) {
 		try {
@@ -19,8 +23,8 @@ public class Hashing {
 	private static String byteArrayToString(byte[] bytes) {
 		String st = "";
 		for (byte b : bytes) {
-            st += String.format("%02X", b);
-        }
+			st += String.format("%02X", b);
+		}
 		return st;
 	}
 }

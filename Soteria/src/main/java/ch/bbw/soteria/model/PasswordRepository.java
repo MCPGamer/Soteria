@@ -6,6 +6,6 @@ import org.springframework.data.repository.CrudRepository;
  * @author Duarte Goncalves Mendes
  * @version 1.0
  */
-public interface PasswordRepository extends CrudRepository<Password, Long>{
+public interface PasswordRepository extends CrudRepository<Password, Long> {
 
 }

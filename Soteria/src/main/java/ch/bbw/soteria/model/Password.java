@@ -7,7 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 /**
- * @author Duarte Goncalves Mendes
+ * @author Duarte Goncalves Mendes & Joel Weiss
  * @version 1.0
  */
 @Entity
@@ -20,7 +20,7 @@ public class Password {
 	private String password;
 	@ManyToOne
 	private User user;
-	
+
 	public String getDomain() {
 		return domain;
 	}

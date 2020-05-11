@@ -13,7 +13,7 @@ import ch.bbw.soteria.model.User;
 import ch.bbw.soteria.model.UserService;
 
 /**
- * @author Duarte Goncalves Mendes
+ * @author Duarte Goncalves Mendes & Joel Weiss
  * @version 1.0
  */
 @Controller
@@ -60,14 +60,13 @@ public class MainMenuController {
 
 		// Check Credentials
 		User loggedInUser = null;
-		for(User checkUser : userService.getUserList()) {
-			if(checkUser.getUsername().equals(user.getUsername())
-					&& checkUser.getPassword().equals(pwd)) {
+		for (User checkUser : userService.getUserList()) {
+			if (checkUser.getUsername().equals(user.getUsername()) && checkUser.getPassword().equals(pwd)) {
 				loggedInUser = checkUser;
 			}
 		}
-		
-		if(loggedInUser != null) {
+
+		if (loggedInUser != null) {
 			// Save current credentials in Runtime for Salting new Passwords
 			userService.setLoggedInUser(user);
 

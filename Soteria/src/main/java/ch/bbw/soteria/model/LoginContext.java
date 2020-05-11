@@ -1,7 +1,7 @@
 package ch.bbw.soteria.model;
 
 /**
- * @author Duarte Goncalves Mendes
+ * @author Duarte Goncalves Mendes & Joel Weiss
  * @version 1.0
  */
 public class LoginContext {
