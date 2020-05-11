@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import ch.bbw.soteria.model.AES;
 import ch.bbw.soteria.model.Hashing;
 import ch.bbw.soteria.model.LoginContext;
 import ch.bbw.soteria.model.User;
@@ -20,7 +21,9 @@ import ch.bbw.soteria.model.UserService;
 public class MainMenuController {
 	@Autowired
 	private UserService userService;
-
+	@Autowired
+	private AES aesService;
+	
 	@GetMapping("index")
 	private String getMainMenu(Model model) {
 		userService.fillUserFromDB();
