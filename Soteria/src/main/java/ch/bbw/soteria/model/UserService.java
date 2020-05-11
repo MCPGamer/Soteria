@@ -20,6 +20,9 @@ public class UserService {
 	private UserRepository repository;
 	private ArrayList<User> userList;
 
+	private String loggedInUser;
+	private String loggedInPassword;
+
 	public UserService() {
 		this.userList = new ArrayList<>();
 	}
