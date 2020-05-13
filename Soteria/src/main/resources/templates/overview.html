@@ -30,33 +30,32 @@
 			</div>
 		</div>
 		<div>
-			<th:block th:each="pw : ${user.passwords}">
-				<div class="card-body">
-					<table class="table">
-						<thead>
-							<tr>
-								<th scope="col">Domain</th>
-								<th scope="col">Username</th>
-								<th scope="col">Password</th>
-							</tr>
-						</thead>
-						<tbody>
+			<div class="card-body">
+				<table class="table">
+					<thead>
+						<tr>
+							<th scope="col">Domain</th>
+							<th scope="col">Username</th>
+							<th scope="col">Password</th>
+						</tr>
+					</thead>
+					<tbody>
+						<th:block th:each="pw : ${user.passwords}">
 							<tr>
 								<td th:text="${pw.domain}"></td>
 								<td th:text="${pw.username}"></td>
 								<td th:text="${pw.password}"></td>
-								<td><a th:href="@{viewPassword(id=${pw.id})}" class="pwdButton button btn btn-primary">View
-										Password</a> <a th:href="@{editPassword(id=${pw.id})}"
-									class="pwdButton button btn btn-primary">Edit Password</a>
-									<a
+								<td><a th:href="@{viewPassword(id=${pw.id})}"
+									class="pwdButton button btn btn-primary">View Password</a> <a
+									th:href="@{editPassword(id=${pw.id})}"
+									class="pwdButton button btn btn-primary">Edit Password</a> <a
 									th:href="@{deletePassword(id=${pw.id})}"
-									class="pwdButton button btn btn-primary">Delete Password</a>
-								</td>
+									class="pwdButton button btn btn-primary">Delete Password</a></td>
 							</tr>
-						</tbody>
-					</table>
-				</div>
-			</th:block>
+						</th:block>
+					</tbody>
+				</table>
+			</div>
 		</div>
 	</div>
 	<footer class="container-fluid bg-4 text-center">

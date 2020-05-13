@@ -93,10 +93,17 @@ public class MainController {
 	}
 	
 	@GetMapping("addPassword")
-	private String addJoke(@ModelAttribute User user, Model model) {
+	private String addJoke(Model model) {
 		PasswordContext context = new PasswordContext();
 
-		context.setUserId(user.getId());
+		LoginContext login = userService.getLoggedInUser();
+		String loggedInPwd = Hashing.hashString(login.getPassword());
+		for(User user : userService.getUserList()) {
+			if(user.getUsername().equals(login.getUsername())
+					&& user.getPassword().equals(loggedInPwd)) {
+				context.setUserId(user.getId());
+			}
+		}
 		
 		model.addAttribute("pwd", context);
 		model.addAttribute("action", "new");
