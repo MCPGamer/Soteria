@@ -93,8 +93,12 @@ public class MainController {
 	}
 	
 	@GetMapping("addPassword")
-	private String addJoke(Model model) {
-		model.addAttribute("pwd", new PasswordContext());
+	private String addJoke(@ModelAttribute User user, Model model) {
+		PasswordContext context = new PasswordContext();
+
+		context.setUserId(user.getId());
+		
+		model.addAttribute("pwd", context);
 		model.addAttribute("action", "new");
 		return "overview.html";
 	}
@@ -145,5 +149,37 @@ public class MainController {
 		model.addAttribute("pwd", context);
 		model.addAttribute("action", "delete");
 		return "overview.html";
+	}
+	
+	@PostMapping("addPassword")
+	private String processAddJoke(@ModelAttribute PasswordContext pwd, Model model) {
+		Password password = new Password();
+		
+		password.setUser(userService.getUser(pwd.getUserId()));
+		password.setDomain(pwd.getDomain());
+		password.setUsername(pwd.getUsername());
+		password.setPassword(aesService.encrypt(pwd.getPassword(), userService.getLoggedInUser().getPassword()));
+		passwordService.persistPassword(password);
+		
+		return login(userService.getLoggedInUser(), model);
+	}
+
+	@PostMapping("editPassword")
+	private String editJoke(@ModelAttribute PasswordContext pwd, Model model) {
+		Password password = passwordService.getPassword(pwd.getId());
+
+		password.setDomain(pwd.getDomain());
+		password.setUsername(pwd.getUsername());
+		password.setPassword(aesService.encrypt(pwd.getPassword(), userService.getLoggedInUser().getPassword()));
+		passwordService.persistPassword(password);
+
+		return login(userService.getLoggedInUser(), model);
+	}
+	
+	@PostMapping("deletePassword")
+	private String deleteJoke(@ModelAttribute PasswordContext pwd, Model model) {
+		passwordService.deletePassword(passwordService.getPassword(pwd.getId()));
+		
+		return login(userService.getLoggedInUser(), model);
 	}
 }
