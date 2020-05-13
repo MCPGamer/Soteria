@@ -80,10 +80,15 @@ input:focus, select:focus {
 	background-color: #222;
 }
 
-.form-control {
+.form-control-mainpage {
     padding-top: 32px;
     font-size: 15pt;
     padding-bottom: 32px;
+    
+}
+
+.form-horizontal .form-group{
+	text-align:center;
 }
 
 .userForm {
