@@ -19,10 +19,16 @@
 	</nav>
 	<!--/.Navbar-->
 	<div id="accordion">
-		<h2>
-			Willkommen
+		<div class="flex-container">
+			<div>
+				<h2>Willkommen</h2>
+			</div>
 			<div th:text="${user.username}" />
-		</h2>
+			<div>
+				<a th:href="@{addPassword}" class="addButton button btn btn-primary">Add
+					Password</a>
+			</div>
+		</div>
 		<div>
 			<th:block th:each="pw : ${user.passwords}">
 				<div class="card-body">
@@ -39,6 +45,13 @@
 								<td th:text="${pw.domain}"></td>
 								<td th:text="${pw.username}"></td>
 								<td th:text="${pw.password}"></td>
+								<td><a th:href="@{viewPassword}" class="pwdButton button btn btn-primary">View
+										Password</a> <a th:href="@{editPassword}"
+									class="pwdButton button btn btn-primary">Edit Password</a>
+									<a
+									th:href="@{deletePassword}"
+									class="pwdButton button btn btn-primary">Delete Password</a>
+								</td>
 							</tr>
 						</tbody>
 					</table>

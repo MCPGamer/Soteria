@@ -18,7 +18,7 @@ import ch.bbw.soteria.model.UserService;
  * @version 1.0
  */
 @Controller
-public class MainMenuController {
+public class MainController {
 	@Autowired
 	private UserService userService;
 	@Autowired
@@ -84,6 +84,5 @@ public class MainMenuController {
 			model.addAttribute("user", user);
 			return "index.html";
 		}
-
 	}
 }
