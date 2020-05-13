@@ -9,8 +9,8 @@ public class PasswordContext {
 	private String domain;
 	private String username;
 	private String password;
-	private int id;
-	private int userId;
+	private long id;
+	private long userId;
 
 	public String getDomain() {
 		return domain;
@@ -36,19 +36,19 @@ public class PasswordContext {
 		this.password = password;
 	}
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
-	public int getUserId() {
+	public long getUserId() {
 		return userId;
 	}
 
-	public void setUserId(int userId) {
+	public void setUserId(long userId) {
 		this.userId = userId;
 	}
 }

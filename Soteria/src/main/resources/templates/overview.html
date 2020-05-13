@@ -45,11 +45,11 @@
 								<td th:text="${pw.domain}"></td>
 								<td th:text="${pw.username}"></td>
 								<td th:text="${pw.password}"></td>
-								<td><a th:href="@{viewPassword}" class="pwdButton button btn btn-primary">View
-										Password</a> <a th:href="@{editPassword}"
+								<td><a th:href="@{viewPassword(id=${pw.id})}" class="pwdButton button btn btn-primary">View
+										Password</a> <a th:href="@{editPassword(id=${pw.id})}"
 									class="pwdButton button btn btn-primary">Edit Password</a>
 									<a
-									th:href="@{deletePassword}"
+									th:href="@{deletePassword(id=${pw.id})}"
 									class="pwdButton button btn btn-primary">Delete Password</a>
 								</td>
 							</tr>
