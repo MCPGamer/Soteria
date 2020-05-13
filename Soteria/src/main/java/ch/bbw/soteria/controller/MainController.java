@@ -110,8 +110,8 @@ public class MainController {
 			}
 		}
 
-		model.addAttribute("user", loggedInUser);
-		return "overview";
+		model.addAttribute("user", userService.getUser(loggedInUser.getId()));
+		return "overview.html";
 	}
 
 	@GetMapping("addPassword")
@@ -214,7 +214,7 @@ public class MainController {
 
 	@PostMapping("deletePassword")
 	private String deletePassword(@ModelAttribute PasswordContext pwd, Model model) {
-		passwordService.deletePassword(passwordService.getPassword(pwd.getId()));
+		passwordService.deletePassword(pwd.getId());
 
 		return "redirect:/overview";
 	}

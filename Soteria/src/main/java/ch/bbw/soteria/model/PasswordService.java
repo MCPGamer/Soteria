@@ -27,7 +27,7 @@ public class PasswordService {
 		return repository.findById(id).get();
 	}
 
-	public void deletePassword(Password password) {
-		repository.delete(password);
+	public void deletePassword(long id) {
+		repository.deleteById(id);;
 	}
 }
