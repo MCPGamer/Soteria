@@ -33,6 +33,7 @@ public class MainController {
 	@GetMapping("index")
 	private String getMainMenu(Model model) {
 		userService.fillUserFromDB();
+		passwordService.fillPasswordsFromDB();
 		model.addAttribute("user", new LoginContext());
 		model.addAttribute("credentialsWrong", false);
 		return "index.html";
@@ -41,6 +42,7 @@ public class MainController {
 	@GetMapping("/")
 	private String getMainMenuRoot(Model model) {
 		userService.fillUserFromDB();
+		passwordService.fillPasswordsFromDB();
 		model.addAttribute("user", new LoginContext());
 		model.addAttribute("credentialsWrong", false);
 		return "index.html";
@@ -162,11 +164,14 @@ public class MainController {
 	private String processAddJoke(@ModelAttribute PasswordContext pwd, Model model) {
 		Password password = new Password();
 		
-		password.setUser(userService.getUser(pwd.getUserId()));
+		User user = userService.getUser(pwd.getUserId());
+		
+		password.setUser(user);
 		password.setDomain(pwd.getDomain());
 		password.setUsername(pwd.getUsername());
 		password.setPassword(aesService.encrypt(pwd.getPassword(), userService.getLoggedInUser().getPassword()));
 		passwordService.persistPassword(password);
+		user.getPasswords().add(password);
 		
 		return login(userService.getLoggedInUser(), model);
 	}
