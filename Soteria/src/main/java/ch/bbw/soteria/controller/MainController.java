@@ -6,10 +6,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import ch.bbw.soteria.model.AES;
 import ch.bbw.soteria.model.Hashing;
 import ch.bbw.soteria.model.LoginContext;
+import ch.bbw.soteria.model.Password;
+import ch.bbw.soteria.model.PasswordContext;
+import ch.bbw.soteria.model.PasswordService;
 import ch.bbw.soteria.model.User;
 import ch.bbw.soteria.model.UserService;
 
@@ -21,6 +25,8 @@ import ch.bbw.soteria.model.UserService;
 public class MainController {
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private PasswordService passwordService;
 	@Autowired
 	private AES aesService;
 	
@@ -84,5 +90,60 @@ public class MainController {
 			model.addAttribute("user", user);
 			return "index.html";
 		}
+	}
+	
+	@GetMapping("addPassword")
+	private String addJoke(Model model) {
+		model.addAttribute("pwd", new PasswordContext());
+		model.addAttribute("action", "new");
+		return "overview.html";
+	}
+
+	@GetMapping("viewPassword")
+	private String viewJoke(@RequestParam int id, Model model) {
+		PasswordContext context = new PasswordContext();
+		Password pwd = passwordService.getPassword(id);
+		
+		context.setId(pwd.getId());
+		context.setUserId(pwd.getUser().getId());
+		context.setDomain(pwd.getDomain());
+		context.setUsername(pwd.getUsername());
+		context.setPassword(aesService.decrypt(pwd.getPassword(), userService.getLoggedInUser().getPassword()));
+		
+		model.addAttribute("pwd", context);
+		model.addAttribute("action", "view");
+		return "overview.html";
+	}
+	
+	@GetMapping("editPassword")
+	private String editJoke(@RequestParam int id, Model model) {
+		PasswordContext context = new PasswordContext();
+		Password pwd = passwordService.getPassword(id);
+
+		context.setId(pwd.getId());
+		context.setUserId(pwd.getUser().getId());
+		context.setDomain(pwd.getDomain());
+		context.setUsername(pwd.getUsername());
+		context.setPassword(aesService.decrypt(pwd.getPassword(), userService.getLoggedInUser().getPassword()));
+		
+		model.addAttribute("pwd", context);
+		model.addAttribute("action", "edit");
+		return "overview.html";
+	}
+	
+	@GetMapping("deletePassword")
+	private String deleteJoke(@RequestParam int id, Model model) {
+		PasswordContext context = new PasswordContext();
+		Password pwd = passwordService.getPassword(id);
+
+		context.setId(pwd.getId());
+		context.setUserId(pwd.getUser().getId());
+		context.setDomain(pwd.getDomain());
+		context.setUsername(pwd.getUsername());
+		context.setPassword(aesService.decrypt(pwd.getPassword(), userService.getLoggedInUser().getPassword()));
+		
+		model.addAttribute("pwd", context);
+		model.addAttribute("action", "delete");
+		return "overview.html";
 	}
 }
