@@ -100,7 +100,7 @@ public class MainController {
 		
 		model.addAttribute("pwd", context);
 		model.addAttribute("action", "new");
-		return "overview.html";
+		return "password.html";
 	}
 
 	@GetMapping("viewPassword")
@@ -116,7 +116,7 @@ public class MainController {
 		
 		model.addAttribute("pwd", context);
 		model.addAttribute("action", "view");
-		return "overview.html";
+		return "password.html";
 	}
 	
 	@GetMapping("editPassword")
@@ -132,7 +132,7 @@ public class MainController {
 		
 		model.addAttribute("pwd", context);
 		model.addAttribute("action", "edit");
-		return "overview.html";
+		return "password.html";
 	}
 	
 	@GetMapping("deletePassword")
@@ -148,7 +148,7 @@ public class MainController {
 		
 		model.addAttribute("pwd", context);
 		model.addAttribute("action", "delete");
-		return "overview.html";
+		return "password.html";
 	}
 	
 	@PostMapping("addPassword")
@@ -161,6 +161,11 @@ public class MainController {
 		password.setPassword(aesService.encrypt(pwd.getPassword(), userService.getLoggedInUser().getPassword()));
 		passwordService.persistPassword(password);
 		
+		return login(userService.getLoggedInUser(), model);
+	}
+	
+	@PostMapping("viewPassword")
+	private String processViewJoke(@ModelAttribute PasswordContext pwd, Model model) {
 		return login(userService.getLoggedInUser(), model);
 	}
 
