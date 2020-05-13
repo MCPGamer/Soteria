@@ -3,38 +3,47 @@
     Author     : Duarte Goncalves Mendes & Joel Weiss
 */
 * {
-    box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 body {
-    font: 20px Montserrat, sans-serif;
-    line-height: 1.8;
-    color: #f5f6f7;
+	font: 20px Montserrat, sans-serif;
+	line-height: 1.8;
+	color: #f5f6f7;
 }
 
 .flex-container {
-  display: flex;
-  flex-wrap: nowrap;
-  width:100%;
+	display: flex;
+	flex-wrap: nowrap;
+	width: 100%;
 }
 
-p {font-size: 16px;}
-.margin {margin-bottom: 45px;}
-.bg-1 { 
-    background-color: #1abc9c; /* Green */
-    color: #ffffff;
+p {
+	font-size: 16px;
 }
-.bg-2 { 
-    background-color: #474e5d; /* Dark Blue */
-    color: #ffffff;
+
+.margin {
+	margin-bottom: 45px;
 }
-.bg-3 { 
-    background-color: #ffffff; /* White */
-    color: #555555;
+
+.bg-1 {
+	background-color: #1abc9c; /* Green */
+	color: #ffffff;
 }
-.bg-4 { 
-    background-color: #2f2f2f; /* Black Gray */
-    color: #fff;
+
+.bg-2 {
+	background-color: #474e5d; /* Dark Blue */
+	color: #ffffff;
+}
+
+.bg-3 {
+	background-color: #ffffff; /* White */
+	color: #555555;
+}
+
+.bg-4 {
+	background-color: #2f2f2f; /* Black Gray */
+	color: #fff;
 }
 
 input, select {
@@ -71,21 +80,27 @@ input:focus, select:focus {
 	background-color: #222;
 }
 
-.userForm{
-	width:50%;
+.form-control {
+    padding-top: 32px;
+    font-size: 15pt;
+    padding-bottom: 32px;
 }
 
-.flex-container > div {
-  margin: 10px;
-  text-align: center;
-  line-height: 75px;
-  font-size: 30px;
+.userForm {
+	width: 50%;
 }
 
-.addButton{
-	width:100%;
+.flex-container>div {
+	margin: 10px;
+	text-align: center;
+	line-height: 75px;
+	font-size: 30px;
 }
 
-.pwdButton{
-	width:20%
+.addButton {
+	width: 100%;
+}
+
+.pwdButton {
+	width: 20%
 }
