@@ -29,11 +29,10 @@ public class MainController {
 	private PasswordService passwordService;
 	@Autowired
 	private AES aesService;
-	
+
 	@GetMapping("index")
 	private String getMainMenu(Model model) {
 		userService.fillUserFromDB();
-		passwordService.fillPasswordsFromDB();
 		model.addAttribute("user", new LoginContext());
 		model.addAttribute("credentialsWrong", false);
 		return "index.html";
@@ -42,7 +41,6 @@ public class MainController {
 	@GetMapping("/")
 	private String getMainMenuRoot(Model model) {
 		userService.fillUserFromDB();
-		passwordService.fillPasswordsFromDB();
 		model.addAttribute("user", new LoginContext());
 		model.addAttribute("credentialsWrong", false);
 		return "index.html";
@@ -61,7 +59,7 @@ public class MainController {
 
 		// Redirect to Password overview
 		model.addAttribute("user", newUser);
-		return "overview.html";
+		return "redirect:/overview";
 	}
 
 	@PostMapping("login")
@@ -82,8 +80,7 @@ public class MainController {
 			userService.setLoggedInUser(user);
 
 			// Redirect to Password overview
-			model.addAttribute("user", loggedInUser);
-			return "overview.html";
+			return "redirect:/overview";
 		} else {
 			userService.setLoggedInUser(null);
 
@@ -93,43 +90,65 @@ public class MainController {
 			return "index.html";
 		}
 	}
-	
+
+	@GetMapping("overview")
+	private String openOverview(Model model) {
+		LoginContext context = userService.getLoggedInUser();
+
+		if (context == null) {
+			return "redirect:/index";
+		}
+
+		// Hash pwd for Checking Credentials
+		String pwd = Hashing.hashString(context.getPassword());
+
+		// Check Credentials
+		User loggedInUser = null;
+		for (User checkUser : userService.getUserList()) {
+			if (checkUser.getUsername().equals(context.getUsername()) && checkUser.getPassword().equals(pwd)) {
+				loggedInUser = checkUser;
+			}
+		}
+
+		model.addAttribute("user", loggedInUser);
+		return "overview";
+	}
+
 	@GetMapping("addPassword")
-	private String addJoke(Model model) {
+	private String addPassword(Model model) {
 		PasswordContext context = new PasswordContext();
 
 		LoginContext login = userService.getLoggedInUser();
 		String loggedInPwd = Hashing.hashString(login.getPassword());
-		for(User user : userService.getUserList()) {
-			if(user.getUsername().equals(login.getUsername())
-					&& user.getPassword().equals(loggedInPwd)) {
+		for (User user : userService.getUserList()) {
+			if (user.getUsername().equals(login.getUsername()) && user.getPassword().equals(loggedInPwd)) {
 				context.setUserId(user.getId());
 			}
 		}
-		
+
 		model.addAttribute("pwd", context);
 		model.addAttribute("action", "new");
 		return "password.html";
 	}
 
 	@GetMapping("viewPassword")
-	private String viewJoke(@RequestParam int id, Model model) {
+	private String viewPassword(@RequestParam int id, Model model) {
 		PasswordContext context = new PasswordContext();
 		Password pwd = passwordService.getPassword(id);
-		
+
 		context.setId(pwd.getId());
 		context.setUserId(pwd.getUser().getId());
 		context.setDomain(pwd.getDomain());
 		context.setUsername(pwd.getUsername());
 		context.setPassword(aesService.decrypt(pwd.getPassword(), userService.getLoggedInUser().getPassword()));
-		
+
 		model.addAttribute("pwd", context);
 		model.addAttribute("action", "view");
 		return "password.html";
 	}
-	
+
 	@GetMapping("editPassword")
-	private String editJoke(@RequestParam int id, Model model) {
+	private String editPassword(@RequestParam int id, Model model) {
 		PasswordContext context = new PasswordContext();
 		Password pwd = passwordService.getPassword(id);
 
@@ -138,14 +157,14 @@ public class MainController {
 		context.setDomain(pwd.getDomain());
 		context.setUsername(pwd.getUsername());
 		context.setPassword(aesService.decrypt(pwd.getPassword(), userService.getLoggedInUser().getPassword()));
-		
+
 		model.addAttribute("pwd", context);
 		model.addAttribute("action", "edit");
 		return "password.html";
 	}
-	
+
 	@GetMapping("deletePassword")
-	private String deleteJoke(@RequestParam int id, Model model) {
+	private String deletePassword(@RequestParam int id, Model model) {
 		PasswordContext context = new PasswordContext();
 		Password pwd = passwordService.getPassword(id);
 
@@ -154,35 +173,35 @@ public class MainController {
 		context.setDomain(pwd.getDomain());
 		context.setUsername(pwd.getUsername());
 		context.setPassword(aesService.decrypt(pwd.getPassword(), userService.getLoggedInUser().getPassword()));
-		
+
 		model.addAttribute("pwd", context);
 		model.addAttribute("action", "delete");
 		return "password.html";
 	}
-	
+
 	@PostMapping("addPassword")
-	private String processAddJoke(@ModelAttribute PasswordContext pwd, Model model) {
+	private String processAddPassword(@ModelAttribute PasswordContext pwd, Model model) {
 		Password password = new Password();
-		
+
 		User user = userService.getUser(pwd.getUserId());
-		
+
 		password.setUser(user);
 		password.setDomain(pwd.getDomain());
 		password.setUsername(pwd.getUsername());
 		password.setPassword(aesService.encrypt(pwd.getPassword(), userService.getLoggedInUser().getPassword()));
 		passwordService.persistPassword(password);
 		user.getPasswords().add(password);
-		
-		return login(userService.getLoggedInUser(), model);
+
+		return "redirect:/overview";
 	}
-	
+
 	@PostMapping("viewPassword")
-	private String processViewJoke(@ModelAttribute PasswordContext pwd, Model model) {
-		return login(userService.getLoggedInUser(), model);
+	private String processViewPassword(@ModelAttribute PasswordContext pwd, Model model) {
+		return "redirect:/overview";
 	}
 
 	@PostMapping("editPassword")
-	private String editJoke(@ModelAttribute PasswordContext pwd, Model model) {
+	private String editPassword(@ModelAttribute PasswordContext pwd, Model model) {
 		Password password = passwordService.getPassword(pwd.getId());
 
 		password.setDomain(pwd.getDomain());
@@ -190,13 +209,13 @@ public class MainController {
 		password.setPassword(aesService.encrypt(pwd.getPassword(), userService.getLoggedInUser().getPassword()));
 		passwordService.persistPassword(password);
 
-		return login(userService.getLoggedInUser(), model);
+		return "redirect:/overview";
 	}
-	
+
 	@PostMapping("deletePassword")
-	private String deleteJoke(@ModelAttribute PasswordContext pwd, Model model) {
+	private String deletePassword(@ModelAttribute PasswordContext pwd, Model model) {
 		passwordService.deletePassword(passwordService.getPassword(pwd.getId()));
-		
-		return login(userService.getLoggedInUser(), model);
+
+		return "redirect:/overview";
 	}
 }
