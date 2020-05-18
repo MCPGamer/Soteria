@@ -8,7 +8,7 @@ Als Datenbank benutzen wir MySql.
 ###Salt & Hashing###
 Damit wir den Salt für die einzelnen Domain-passwörter erstellen können, brauchen wir jedoch das Masterpasswort im Klartext. Deshalb speichern wir die Credentials temporär in der Applikation.
 Da wir zwar das Passwort und den Benutzernamen in der Applikation speichern, ist dies dennoch nicht sehr problematisch.
-Die Applikation führt dies pro Benutzer individuell durch, da dies im Rahmen vom Sessionscope durchgeführt wird.
+Die Applikation führt dies pro Benutzer individuell durch, da das Speichern der Daten im Rahmen vom Sessionscope durchgeführt wird.
 
 ###Masterpasswort###
 
